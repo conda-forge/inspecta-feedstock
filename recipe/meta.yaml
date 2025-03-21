@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/inspecta-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/inspecta-{{ version }}.tar.gz
   sha256: 17124dfae9b05e6226cc426036aa7736bbdf37d61ae5cc85178474ca9ec3d6c1
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools-git >=1.2
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - rootpath >=0.1.0
     - six >=1.11.0
     - pygments >=2.2.0
@@ -38,6 +38,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/grimen/python-inspecta
